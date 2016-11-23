@@ -22,11 +22,11 @@ module CephRuby
       attach_function 'rados_ioctx_create', [:pointer, :string, :pointer], :int
       attach_function 'rados_ioctx_destroy', [:pointer], :void
 
-      attach_function 'rados_write', [:pointer, :string, :buffer_in, :size_t, :off_t], :int
-      attach_function 'rados_read', [:pointer, :string, :buffer_out, :size_t, :off_t], :int
-      attach_function 'rados_remove', [:pointer, :string], :int
-      attach_function 'rados_trunc', [:pointer, :string, :size_t], :int
-      attach_function 'rados_stat', [:pointer, :string, :pointer, :pointer], :int
+      attach_function 'rados_write', [:pointer, :string, :buffer_in, :size_t, :off_t], :int, :blocking => true
+      attach_function 'rados_read', [:pointer, :string, :buffer_out, :size_t, :off_t], :int, :blocking => true
+      attach_function 'rados_remove', [:pointer, :string], :int, :blocking => true
+      attach_function 'rados_trunc', [:pointer, :string, :size_t], :int, :blocking => true
+      attach_function 'rados_stat', [:pointer, :string, :pointer, :pointer], :int, :blocking => true
 
       def self.version
         major = FFI::MemoryPointer.new(:int)
